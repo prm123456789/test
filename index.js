@@ -1,5 +1,3 @@
-// index.js
-
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
 import './config.js';
 import { createRequire } from 'module';
@@ -20,12 +18,12 @@ import {
 } from '@whiskeysockets/baileys';
 import { protoType, serialize } from './lib/simple.js';
 import NodeCache from 'node-cache';
-import pino from 'pino';
 import readline from 'readline';
 import fs from 'fs';
 import path from 'path';
 import { Boom } from '@hapi/boom';
 import { fileURLToPath } from 'url';
+import { startServer } from './server.js'; // importe la fonction startServer
 
 // Fonctions globales
 global.__filename = function (pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
@@ -109,7 +107,7 @@ async function main() {
         console.log(chalk.red('❌ Session supprimée. Relancez pour vous reconnecter.'));
       } else {
         console.log(chalk.red('❌ Déconnecté, reconnexion...'));
-        process.exit();
+        // Au lieu de process.exit(), tu peux relancer la connexion ici si tu veux
       }
     }
   });
@@ -118,8 +116,9 @@ async function main() {
   const handlerModule = await import('./handler.js');
   conn.ev.on('messages.upsert', handlerModule.handler.bind(conn));
 
-  // --- LANCEMENT DU SERVEUR EXPRESS ---
-  await import('./server.js');
+  // --- LANCEMENT DU SERVEUR EXPRESS avec la connexion active ---
+  startServer(conn);
+
   console.log('✅ Serveur HTTP démarré');
 }
 
