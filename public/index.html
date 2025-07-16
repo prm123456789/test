@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INCONNU XD BOT - Connexion WhatsApp</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 INCONNU XD BOT</h1>
+    <p>Connecte ton bot WhatsApp facilement</p>
+
+    <form id="pairingForm">
+      <input type="text" id="phone" placeholder="Numéro WhatsApp avec indicatif (+33...)" required />
+      <button type="submit">Générer le code de connexion</button>
+    </form>
+
+    <div id="codeContainer" class="hidden">
+      <h2>🔑 Ton code de connexion :</h2>
+      <div id="pairingCode">—</div>
+      <button id="copyButton">Copier le code</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
