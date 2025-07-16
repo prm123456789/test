@@ -5,7 +5,8 @@ import './config.js';
 import { createRequire } from 'module';
 import { platform } from 'process';
 import { Low, JSONFile } from 'lowdb';
-import { chain } from 'lodash';
+import lodash from 'lodash';               // Correction import lodash
+const { chain } = lodash;                  // Extraction de chain depuis lodash
 import yargs from 'yargs';
 import cfonts from 'cfonts';
 import chalk from 'chalk';
