@@ -1,0 +1,30 @@
+{
+  "name": "inconnu-xd-bot",
+  "version": "1.0.0",
+  "description": "Bot WhatsApp Multi Session + Multi Préfixe + Site Pairing",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "server": "node server.js",
+    "qr": "node index.js qr",
+    "code": "node index.js code"
+  },
+  "author": "INCONNU BOY TECH",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.6.0",
+    "axios": "^1.6.0",
+    "boxen": "^7.1.1",
+    "cfonts": "^3.3.0",
+    "chalk": "^5.3.0",
+    "express": "^4.19.0",
+    "lodash": "^4.17.21",
+    "lowdb": "^3.0.0",
+    "node-cache": "^5.1.2",
+    "pino": "^8.15.0",
+    "qrcode-terminal": "^0.12.0",
+    "yargs": "^17.7.2",
+    "google-libphonenumber": "^3.2.38"
+  }
+}
