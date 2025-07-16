@@ -1,5 +1,4 @@
 // index.js
-// index.js
 
 process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '1';
 import './config.js';
@@ -11,7 +10,14 @@ const { chain } = lodash;
 import yargs from 'yargs';
 import cfonts from 'cfonts';
 import chalk from 'chalk';
-import { makeWASocket, fetchLatestBaileysVersion, useMultiFileAuthState, makeCacheableSignalKeyStore, jidNormalizedUser, DisconnectReason } from '@whiskeysockets/baileys';
+import {
+  makeWASocket,
+  fetchLatestBaileysVersion,
+  useMultiFileAuthState,
+  makeCacheableSignalKeyStore,
+  jidNormalizedUser,
+  DisconnectReason,
+} from '@whiskeysockets/baileys';
 import { protoType, serialize } from './lib/simple.js';
 import NodeCache from 'node-cache';
 import pino from 'pino';
@@ -23,7 +29,7 @@ import { fileURLToPath } from 'url';
 
 // Fonctions globales
 global.__filename = function (pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
-  return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : new URL(pathURL).toString();
+  return rmPrefix ? (/file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL) : new URL(pathURL).toString();
 };
 global.__dirname = function (pathURL) {
   return path.dirname(global.__filename(pathURL, true));
@@ -111,7 +117,10 @@ async function main() {
 
   const handlerModule = await import('./handler.js');
   conn.ev.on('messages.upsert', handlerModule.handler.bind(conn));
+
+  // --- LANCEMENT DU SERVEUR EXPRESS ---
+  await import('./server.js');
+  console.log('✅ Serveur HTTP démarré');
 }
 
-// Appel de la fonction principale
 main().catch(console.error);
