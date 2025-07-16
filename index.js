@@ -5,24 +5,24 @@ import './config.js';
 import { createRequire } from 'module';
 import { platform } from 'process';
 import { Low, JSONFile } from 'lowdb';
-import lodash from 'lodash';               // Correction import lodash
-const { chain } = lodash;                  // Extraction de chain depuis lodash
+import lodash from 'lodash';
+const { chain } = lodash;
 import yargs from 'yargs';
 import cfonts from 'cfonts';
 import chalk from 'chalk';
-import { makeWASocket, protoType, serialize } from './lib/simple.js';
-import { fetchLatestBaileysVersion, useMultiFileAuthState, makeCacheableSignalKeyStore, jidNormalizedUser, DisconnectReason } from '@whiskeysockets/baileys';
+import { makeWASocket, fetchLatestBaileysVersion, useMultiFileAuthState, makeCacheableSignalKeyStore, jidNormalizedUser, DisconnectReason } from '@whiskeysockets/baileys';
+import { protoType, serialize } from './lib/simple.js';
 import NodeCache from 'node-cache';
 import pino from 'pino';
 import readline from 'readline';
 import fs from 'fs';
-import path, { join } from 'path';
+import path from 'path';
 import { Boom } from '@hapi/boom';
 import { fileURLToPath } from 'url';
 
 // Fonctions globales
 global.__filename = function (pathURL = import.meta.url, rmPrefix = platform !== 'win32') {
-  return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : pathToFileURL(pathURL).toString();
+  return rmPrefix ? /file:\/\/\//.test(pathURL) ? fileURLToPath(pathURL) : pathURL : new URL(pathURL).toString();
 };
 global.__dirname = function (pathURL) {
   return path.dirname(global.__filename(pathURL, true));
